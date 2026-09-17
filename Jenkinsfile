@@ -18,22 +18,22 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Installing Node.js dependencies...'
-                sh 'PATH="/usr/local/bin:$PATH" npm install'
+                sh 'npm install'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'PATH="/usr/local/bin:$PATH" npm test'
+                sh 'npm test'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker image...'
-                sh 'PATH="/usr/local/bin:$PATH" docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
-                sh 'PATH="/usr/local/bin:$PATH" docker tag $DOCKER_IMAGE:$BUILD_NUMBER $DOCKER_IMAGE:latest'
+                sh 'docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
+                sh 'docker tag $DOCKER_IMAGE:$BUILD_NUMBER $DOCKER_IMAGE:latest'
             }
         }
 
@@ -48,9 +48,9 @@ pipeline {
                         passwordVariable: 'DOCKER_PASSWORD'
                     )
                 ]) {
-                    sh 'PATH="/usr/local/bin:$PATH"; echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-                    sh 'PATH="/usr/local/bin:$PATH" docker push $DOCKER_IMAGE:$BUILD_NUMBER'
-                    sh 'PATH="/usr/local/bin:$PATH" docker push $DOCKER_IMAGE:latest'
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                    sh 'docker push $DOCKER_IMAGE:$BUILD_NUMBER'
+                    sh 'docker push $DOCKER_IMAGE:latest'
                 }
             }
         }
