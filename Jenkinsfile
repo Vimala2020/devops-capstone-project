@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'vimala92/devops-capstone-app'
-        'PATH+EXTRA'= '/usr/local/bin:/bin:/usr/bin:/usr/sbin:/sbin'
+        'PATH+EXTRA' = '/usr/local/bin:/bin:/usr/bin:/usr/sbin:/sbin'
     }
 
     stages {
