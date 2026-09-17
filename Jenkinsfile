@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'vimala92/devops-capstone-app'
-       
+        PATH = "/usr/local/bin:/Users/apple/.nvm/versions/node/v22.12.0/bin:${env.PATH}"
     }
 
     stages {
